@@ -1,10 +1,13 @@
 {
   description = "Nix utils and historic package versions";
   outputs = { self }:
-    let lib = (import ./util/default.nix);
-    in lib.flake-utils.eachDefaultSystem
-      (system: {
-        legacyPackages = (import ./default.nix) { inherit system; };
-        checks = import ./checks.nix { inherit system; };
-      });
+    let util = (import ./util/default.nix);
+        inherit (util.flake-utils) eachDefaultSystem;
+    in { inherit util eachDefaultSystem; } //
+       eachDefaultSystem (system: {
+         legacyPackages = {
+           history = import ./history/default.nix { inherit system; };
+         };
+         checks = import ./checks.nix { inherit system; };
+       });
 }

@@ -1,7 +1,5 @@
 { system ? builtins.currentSystem
 }:
 
-{
-  util = import ./util/default.nix;
-  history = import ./history/default.nix { inherit system; };
-}
+let fo = (import ./flake.nix).outputs { self = fo; };
+in { inherit (fo) util eachDefaultSystem; } // fo.legacyPackages.${system}

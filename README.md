@@ -3,6 +3,7 @@
 ## Utils
 
 * `#util.flake-utils`: A reference to [[https://github.com/numtide/flake-utils/][numtide/flake-utils]]
+* `#eachDefaultSystem`: Short for `#util.flake-utils.eachDefaultSystem`
 * `#util.lib`: A reference to `pkgs.lib` from `nixpkgs`.
 
 ## Historic software
